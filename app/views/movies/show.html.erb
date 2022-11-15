@@ -6,19 +6,29 @@
 
     <div>
       <div>
-        <a href="/movies">
+        <!--<a href="/movies">-->
+        <!-- using helper method -->
+        <a href="<%= movies_path %>">
           Go back
         </a>
       </div>
 
       <div>
-        <a href="/movies/<%= @the_movie.id %>/edit">
+        <!--<a href="/movies/<%#= @the_movie.id %>/edit">-->
+        <!-- using helper method -->
+        <!--<a href="<%= edit_movie_path(@the_movie.id) %>">-->
+        <!-- rails can assume that you want the .id from the argument of the method -->
+        <a href="<%= edit_movie_path(@the_movie) %>">
           Edit movie
         </a>
       </div>
 
       <div>
-        <a href="/movies/<%= @the_movie.id %>" data-method="delete">
+        <!--<a href="/movies/<%= @the_movie.id %>" data-method="delete">-->
+        <!-- using helper method -->
+        <!--<a href="<%= movie_path(@the_movie.id) %>" data-method="delete">-->
+        <!-- rails can assume that you want the .id from the argument of the method -->
+        <a href="<%= movie_path(@the_movie) %>" data-method="delete">
           Delete movie
         </a>
       </div>

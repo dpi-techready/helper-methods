@@ -10,7 +10,7 @@
 <!-- with route as: :details -->
 <%#= details_path(42) %>
 <!-- shows full origin url -->
-<%= details_url(42) %>
+<%#= details_url(42) %>
 </h2>
 
 <hr>
@@ -71,7 +71,11 @@
     </td>
 
     <td>
-      <a href="/movies/<%= a_movie.id %>">
+      <!--<a href="/movies/<%#= a_movie.id %>">-->
+      <!-- using helper method -->
+      <!--<a href="<%= movie_path(a_movie.id) %>">-->
+      <!-- rails can assume that you want the .id from the argument of the method -->
+      <a href="<%= movie_path(a_movie) %>">
         Show details
       </a>
     </td>

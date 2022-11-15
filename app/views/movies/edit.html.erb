@@ -4,7 +4,13 @@
   <p style="color: red;"><%= message %></p>
 <% end %>
 
-<form action="/movies/<%= @the_movie.id %>" method="post">
+<!--<form action="/movies/<%= @the_movie.id %>" method="post">-->
+<!-- using helper method -->
+<!--<form action="<%= movie_path(@the_movie.id) %>" method="post">-->
+<!-- rails can assume that you want the .id from the argument of the method -->
+<form action="<%= movie_path(@the_movie) %>" method="post">
+
+
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
   
   <input name="_method" value="patch" type="hidden">
