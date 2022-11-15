@@ -16,7 +16,8 @@ class MoviesController < ApplicationController
       end
 
       format.html do
-        render({ :template => "movies/index.html.erb" })
+        # render({ :template => "movies/index.html.erb" })
+        render template: "movies/index.html.erb"
       end
     end
   end
@@ -28,7 +29,9 @@ class MoviesController < ApplicationController
 
     @the_movie = matching_movies.first
 
-    render({ :template => "movies/show.html.erb" })
+    # render({ :template => "movies/show.html.erb" })
+    render template: "movies/show.html.erb"
+
   end
 
   def create
@@ -38,8 +41,12 @@ class MoviesController < ApplicationController
 
     if @the_movie.valid?
       @the_movie.save
-      redirect_to("/movies", { :notice => "Movie created successfully." })
+      # redirect_to("/movies", { :notice => "Movie created successfully." })
+      # using helper method (use paths on the clients and urls on the server side)
+      redirect_to movies_url, notice: "Movie created successfully."
+
     else
+      # render({ :template => "movies/new.html.erb" })
       render template: "movies/new.html.erb"
     end
   end
@@ -51,7 +58,8 @@ class MoviesController < ApplicationController
 
     @the_movie = matching_movies.first
 
-    render({ :template => "movies/edit.html.erb" })
+    # render({ :template => "movies/edit.html.erb" })
+    render template: "movies/edit.html.erb"
   end
 
   def update
@@ -63,9 +71,14 @@ class MoviesController < ApplicationController
 
     if the_movie.valid?
       the_movie.save
-      redirect_to("/movies/#{the_movie.id}", { :notice => "Movie updated successfully."} )
+      # redirect_to("/movies/#{the_movie.id}", { :notice => "Movie updated successfully."} )
+      # using helper method (.id is implicit)
+      redirect_to movie_url(the_movie), notice: "Movie updated successfully."
+
     else
-      redirect_to("/movies/#{the_movie.id}", { :alert => "Movie failed to update successfully." })
+      # redirect_to("/movies/#{the_movie.id}", { :alert => "Movie failed to update successfully." })
+      redirect_to movie_url(the_movie),  alert: "Movie failed to update successfully."
+
     end
   end
 
@@ -75,6 +88,8 @@ class MoviesController < ApplicationController
 
     the_movie.destroy
 
-    redirect_to("/movies", { :notice => "Movie deleted successfully."} )
-  end
+    # redirect_to("/movies", { :notice => "Movie deleted successfully."} )
+    # using helper method (use paths on the clients and urls on the server side)
+    redirect_to movies_url, notice: "Movie deleted successfully."
+    end
 end
