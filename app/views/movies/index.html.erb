@@ -2,10 +2,23 @@
   List of all movies
 </h1>
 
+<h2>
+<!-- visible routes on html -->
+<%#= movies_path %>
+<%#= root_path %>
+<%#= movies_new_path %>
+<!-- with route as: :details -->
+<%#= details_path(42) %>
+<!-- shows full origin url -->
+<%= details_url(42) %>
+</h2>
+
 <hr>
 
 <div>
-  <a href="/movies/new">Add a new movie</a>
+  <!--<a href="/movies/new">Add a new movie</a>-->
+  <!-- using helper method -->
+  <a href="<%= new_movie_path %>">Add a new movie</a>
 </div>
 
 <hr>
