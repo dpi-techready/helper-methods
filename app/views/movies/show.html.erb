@@ -34,9 +34,15 @@
         <!--<a href="<%#= movie_path(@the_movie.id) %>" data-method="delete">-->
         <!-- rails can assume that you want the .id from the argument of the method -->
         <!--<a href="<%#= movie_path(@the_movie) %>" data-method="delete">-->
-        <a href="<%= movie_path(@movie) %>" data-method="delete">
+        <!--<a href="<%#= movie_path(@movie) %>" data-method="delete">
           Delete movie
-        </a>
+        </a>-->
+        <!-- using shorthand -->
+        <%#= link_to "delete", movie_path(@movie), method: :delete %>
+        <!-- add a confirmation -->
+        <%#= link_to "delete", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" } %>
+        <!-- add a class or any other attribute -->
+        <%= link_to "delete", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn=primary" %>
       </div>
     </div>
 

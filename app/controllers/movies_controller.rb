@@ -23,6 +23,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.json do
+        # convert to jason to serve to an application as an API
         # render json: @list_of_movies
         render json: @movie
       end
@@ -65,8 +66,13 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new
-    @movie.title = params.fetch("title")
-    @movie.description = params.fetch("description")
+    # @movie.title = params.fetch("title")
+    # @movie.description = params.fetch("description")
+    # @movie.title = params.fetch(:title)
+    # @movie.description = params.fetch(:description)
+    # nested movie attributes in new form
+    @movie.title = params.fetch(:movie).(:title)
+    @movie.description = params.fetch(:movie).fetch(:description)
 
     if @movie.valid?
       @movie.save
@@ -112,8 +118,10 @@ class MoviesController < ApplicationController
 
     # the_movie.title = params.fetch("query_title")
     # the_movie.description = params.fetch("query_description")
-    @movie.title = params.fetch("title")
-    @movie.description = params.fetch("description")
+    # @movie.title = params.fetch("title")
+    # @movie.description = params.fetch("description")
+    @movie.title = params.fetch(:title)
+    @movie.description = params.fetch(:description)
 
     # if the_movie.valid?
     #   the_movie.save
