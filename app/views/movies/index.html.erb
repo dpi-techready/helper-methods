@@ -18,7 +18,9 @@
 <div>
   <!--<a href="/movies/new">Add a new movie</a>-->
   <!-- using helper method -->
-  <a href="<%= new_movie_path %>">Add a new movie</a>
+  <!--<a href="<%= new_movie_path %>">Add a new movie</a>-->
+  <!-- using helper method -->
+  <%= link_to "Add a new movie", new_movie_path %>
 </div>
 
 <hr>
@@ -75,9 +77,13 @@
       <!-- using helper method -->
       <!--<a href="<%= movie_path(a_movie.id) %>">-->
       <!-- rails can assume that you want the .id from the argument of the method -->
-      <a href="<%= movie_path(a_movie) %>">
+      <!--<a href="<%= movie_path(a_movie) %>">
         Show details
-      </a>
+      </a>-->
+      <!-- using helper method -->
+      <!--<%= link_to "Show details", movie_path(a_movie) %>-->
+      <!-- using shorthand -->
+      <%= link_to "Show details", a_movie %>
     </td>
   </tr>
   <% end %>

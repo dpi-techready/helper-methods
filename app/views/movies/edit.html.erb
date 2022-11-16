@@ -4,12 +4,27 @@
   <p style="color: red;"><%= message %></p>
 <% end %>
 
+<%= form_with(url: movie_path(@the_movie), method: :patch) do %>
+   <div>
+    <%= label_tag :title_box, "Title" %>
+
+    <%= text_field_tag :query_title, @the_movie.title, id: "title_box" %>
+  </div>
+
+  <div>
+    <%= label_tag :description_box, "Description" %>
+
+    <%= text_area_tag :query_description, @the_movie.description, id: "description_box", rows: 3 %>
+  </div>
+
+    <%= button_tag "Update movie" %>
+<% end %>
+
 <!--<form action="/movies/<%= @the_movie.id %>" method="post">-->
 <!-- using helper method -->
 <!--<form action="<%= movie_path(@the_movie.id) %>" method="post">-->
 <!-- rails can assume that you want the .id from the argument of the method -->
-<form action="<%= movie_path(@the_movie) %>" method="post">
-
+<!--<form action="<%= movie_path(@the_movie) %>" method="post">
 
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
   
@@ -34,4 +49,4 @@
   <button>
     Update movie
   </button>
-</form>
+</form>-->
