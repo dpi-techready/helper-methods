@@ -50,8 +50,9 @@
     <th>
     </th>
   </tr>
-
-  <% @list_of_movies.each do |a_movie| %>
+  <!-- made changes in controller -->
+  <%# @list_of_movies.each do |a_movie| %>
+  <% @movies.each do |a_movie| %>
   <tr>
     <td>
       <%= a_movie.id %>

@@ -1,32 +1,36 @@
 <h1>Edit movie</h1>
 
-<% @the_movie.errors.full_messages.each do |message| %>
+<%# @the_movie.errors.full_messages.each do |message| %>
+<% @movie.errors.full_messages.each do |message| %>
   <p style="color: red;"><%= message %></p>
 <% end %>
 
-<%= form_with(url: movie_path(@the_movie), method: :patch) do %>
+<%#= form_with(url: movie_path(@the_movie), method: :patch) do %>
+<%= form_with(url: movie_path(@movie), method: :patch) do %>
    <div>
     <%= label_tag :title_box, "Title" %>
 
-    <%= text_field_tag :query_title, @the_movie.title, id: "title_box" %>
+    <%#= text_field_tag :query_title, @the_movie.title, id: "title_box" %>
+    <%= text_field_tag :query_title, @movie.title, id: "title_box" %>
   </div>
 
   <div>
     <%= label_tag :description_box, "Description" %>
 
-    <%= text_area_tag :query_description, @the_movie.description, id: "description_box", rows: 3 %>
+    <%#= text_area_tag :query_description, @the_movie.description, id: "description_box", rows: 3 %>
+    <%= text_area_tag :query_description, @movie.description, id: "description_box", rows: 3 %>
   </div>
 
     <%= button_tag "Update movie" %>
 <% end %>
 
-<!--<form action="/movies/<%= @the_movie.id %>" method="post">-->
+<!--<form action="/movies/<%#= @the_movie.id %>" method="post">-->
 <!-- using helper method -->
-<!--<form action="<%= movie_path(@the_movie.id) %>" method="post">-->
+<!--<form action="<%#= movie_path(@the_movie.id) %>" method="post">-->
 <!-- rails can assume that you want the .id from the argument of the method -->
-<!--<form action="<%= movie_path(@the_movie) %>" method="post">
+<!--<form action="<%#= movie_path(@the_movie) %>" method="post">
 
-  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <input name="authenticity_token" value="<%#= form_authenticity_token %>" type="hidden">
   
   <input name="_method" value="patch" type="hidden">
 
@@ -35,7 +39,7 @@
       Title
     </label>
 
-    <input type="text" id="title_box" name="query_title" value="<%= @the_movie.title %>">
+    <input type="text" id="title_box" name="query_title" value="<%#= @the_movie.title %>">
   </div>
 
   <div>
@@ -43,7 +47,7 @@
       Description
     </label>
 
-    <textarea id="description_box" name="query_description" rows="3"><%= @the_movie.description %></textarea>
+    <textarea id="description_box" name="query_description" rows="3"><%#= @the_movie.description %></textarea>
   </div>
 
   <button>

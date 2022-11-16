@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   def new
-    @the_movie = Movie.new
+    @movie = Movie.new
 
     # render({ :template => "movies/new.html.erb" })  
     # render template: "movies/new.html.erb"
@@ -9,13 +9,22 @@ class MoviesController < ApplicationController
   end
 
   def index
-    matching_movies = Movie.all
+    # matching_movies = Movie.all
 
-    @list_of_movies = matching_movies.order({ :created_at => :desc })
+    # @list_of_movies = matching_movies.order({ :created_at => :desc })
+    # get rid of curly brackets
+    # @list_of_movies = matching_movies.order( :created_at => :desc )
+    # new syntax
+    # @list_of_movies = matching_movies.order( created_at: :desc )
+    # better syntax
+    @movies = Movie.order(created_at: :desc)
+
+
 
     respond_to do |format|
       format.json do
-        render json: @list_of_movies
+        # render json: @list_of_movies
+        render json: @movie
       end
 
       # format.html do
@@ -28,11 +37,26 @@ class MoviesController < ApplicationController
   end
 
   def show
-    the_id = params.fetch(:id)
+    # line gets replaced under matching_movies
+    # the_id = params.fetch(:id)
 
-    matching_movies = Movie.where({ :id => the_id })
+    # matching_movies = Movie.where({ :id => the_id })
+    # get rid of curly brackets
+    # matching_movies = Movie.where(:id => the_id)
+    # new syntaxt
+    # matching_movies = Movie.where(id: the_id)
+    # combines first line
+    # matching_movies = Movie.where(id: params.fetch(:id))
+    # combines all lines
+    # @the_movie = Movie.where(id: params.fetch(:id)).first
+    # helper method
+    # @the_movie = Movie.find_by(id: params.fetch(:id))
+    # shorthand
+    @movie = Movie.find(params.fetch(:id))
 
-    @the_movie = matching_movies.first
+
+
+    # @the_movie = matching_movies.first
 
     # render({ :template => "movies/show.html.erb" })
     # render template: "movies/show.html.erb"
@@ -40,12 +64,12 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @the_movie = Movie.new
-    @the_movie.title = params.fetch("query_title")
-    @the_movie.description = params.fetch("query_description")
+    @movie = Movie.new
+    @movie.title = params.fetch("query_title")
+    @movie.description = params.fetch("query_description")
 
-    if @the_movie.valid?
-      @the_movie.save
+    if @movie.valid?
+      @movie.save
       # redirect_to("/movies", { :notice => "Movie created successfully." })
       # using helper method (use paths on the clients and urls on the server side)
       redirect_to movies_url, notice: "Movie created successfully."
@@ -59,11 +83,18 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    the_id = params.fetch(:id)
+    # the_id = params.fetch(:id)
 
-    matching_movies = Movie.where({ :id => the_id })
+    # matching_movies = Movie.where({ :id => the_id })
+    # remove curly brackets
+    # matching_movies = Movie.where( :id => the_id )
+    # new syntaxt
+    # matching_movies = Movie.where(id: the_id)
 
-    @the_movie = matching_movies.first
+    # @the_movie = matching_movies.first
+    # new syntaxt
+    @movie = Movie.find(params.fetch(:id))
+
 
     # render({ :template => "movies/edit.html.erb" })
     # render template: "movies/edit.html.erb"
@@ -71,29 +102,49 @@ class MoviesController < ApplicationController
   end
 
   def update
-    the_id = params.fetch(:id)
-    the_movie = Movie.where({ :id => the_id }).first
+    # the_id = params.fetch(:id)
+    
+    # the_movie = Movie.where({ :id => the_id }).first
+    # get rid of curly brackets
+    # the_movie = Movie.where( :id => the_id ).first
+    # new syntax
+    @movie = Movie.find(params.fetch(:id))
 
-    the_movie.title = params.fetch("query_title")
-    the_movie.description = params.fetch("query_description")
+    # the_movie.title = params.fetch("query_title")
+    # the_movie.description = params.fetch("query_description")
+    @movie.title = params.fetch("query_title")
+    @movie.description = params.fetch("query_description")
 
-    if the_movie.valid?
-      the_movie.save
+    # if the_movie.valid?
+    #   the_movie.save
+    if @movie.valid?
+      @movie.save
       # redirect_to("/movies/#{the_movie.id}", { :notice => "Movie updated successfully."} )
       # using helper method (.id is implicit)
-      redirect_to movie_url(the_movie), notice: "Movie updated successfully."
+      # redirect_to movie_url(the_movie), notice: "Movie updated successfully."
+      redirect_to movie_url(@movie), notice: "Movie updated successfully."
 
     else
       # redirect_to("/movies/#{the_movie.id}", { :alert => "Movie failed to update successfully." })
-      redirect_to movie_url(the_movie),  alert: "Movie failed to update successfully."
+      # redirect_to movie_url(the_movie),  alert: "Movie failed to update successfully."]
+      redirect_to movie_url(@movie),  alert: "Movie failed to update successfully."
     end
   end
 
   def destroy
-    the_id = params.fetch(:id)
-    the_movie = Movie.where({ :id => the_id }).first
+    # the_id = params.fetch(:id)
 
-    the_movie.destroy
+    # the_movie = Movie.where({ :id => the_id }).first
+    # get rid of curly brackets
+    # the_movie = Movie.where( :id => the_id ).first
+    # new syntax
+    # @the_movie = Movie.find(params.fetch(:id))
+    @movie = Movie.find(params.fetch(:id))
+
+
+
+    # the_movie.destroy
+    @movie.destroy
 
     # redirect_to("/movies", { :notice => "Movie deleted successfully."} )
     # using helper method (use paths on the clients and urls on the server side)
