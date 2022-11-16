@@ -17,13 +17,15 @@
       Title
     </label>-->
     <!-- using helper method shorthand -->
-    <%= label_tag :title_box, "Title" %>
-
+    <%#= label_tag :title_box, "Title" %>
+    <%= label_tag :title %>
 
     <!--<input type="text" id="title_box" name="query_title" value="<%#= @the_movie.title %>">-->
     <!-- using helper method shorthand -->
     <%#= text_field_tag :query_title, @the_movie.title, id: "title_box" %>
-    <%= text_field_tag :query_title, @movie.title, id: "title_box" %>
+    <%# <%= text_field_tag :query_title, @movie.title, id: "title_box" %>
+    <%#= text_field_tag :title, @movie.title, id: "title_box" %>
+    <%= text_field_tag :title, @movie.title %>
   </div>
 
   <div>
@@ -31,12 +33,15 @@
       Description
     </label>-->
     <!-- using helper method shorthand -->
-    <%= label_tag :description_box, "Description" %>
+    <%#= label_tag :description_box, "Description" %>
+    <%= label_tag :description %>
 
     <!--<textarea id="description_box" name="query_description" rows="3"><%#= @the_movie.description %></textarea>-->
     <!-- using helper method shorthand -->
     <%#= text_area_tag :query_description, @the_movie.description, id: "description_box", rows: 3 %>
-    <%= text_area_tag :query_description, @movie.description, id: "description_box", rows: 3 %>
+    <%#= text_area_tag :query_description, @movie.description, id: "description_box", rows: 3 %>
+    <%#= text_area_tag :description, @movie.description, id: "description_box", rows: 3 %>
+    <%= text_area_tag :description, @movie.description, rows: 3 %>
   </div>
 
   <!--<button>
